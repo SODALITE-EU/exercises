@@ -1,0 +1,25 @@
+ssh-key-name: <user keypair name>
+ssh-public-key: <xopera-rest-api public key>
+
+vm-name: <user vm name>
+
+image-name: "Ubuntu 20.04 Focal Fossa 20200423"
+openstack-network-name: sodalite-net
+openstack-floating-ip-pool: ext-net
+security-group-name: ml-app-security
+security-groups: ml-app-security,default
+flavor-name: 1C-4GB-20GB
+username: ubuntu
+
+env:
+  os_env:
+    OS_USERNAME:
+    OS_PASSWORD:
+    OS_AUTH_URL:
+    OS_USER_DOMAIN_NAME:
+    OS_PROJECT_DOMAIN_NAME:
+    OS_REGION_NAME:
+    OS_PROJECT_NAME:
+    OS_TENANT_NAME:
+    OS_AUTH_VERSION:
+    OS_IDENTITY_API_VERSION:
