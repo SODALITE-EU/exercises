@@ -35,7 +35,7 @@ node_templates:
   
   // OpenStack keypair
   keypair:
-    type: sodalite.nodes.OpenStack.Keypair
+    type: openstack/sodalite.nodes.OpenStack.Keypair
     properties:  
       name: get_input: ssh-key-name
       public_key: get_input: ssh-public-key
