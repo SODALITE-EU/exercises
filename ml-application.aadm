@@ -62,7 +62,7 @@ node_templates:
 
   // OpenStack VM
   sodalite-vm:  
-    type: sodalite.nodes.OpenStack.VM 
+    type: openstack/sodalite.nodes.OpenStack.VM 
     properties:  
       name: get_input: vm-name
       key_name: get_input: ssh-key-name
@@ -82,14 +82,14 @@ node_templates:
 
   // Docker host
   docker-host:
-    type: sodalite.nodes.DockerHost
+    type: docker/sodalite.nodes.DockerHost
     requirements:
       host:
         node: sodalite-vm
 
   // Docker network
   docker-network:
-    type: sodalite.nodes.DockerNetwork
+    type: docker/sodalite.nodes.DockerNetwork
     properties:
       name: "ml-app-docker-network"
     requirements:
@@ -100,7 +100,7 @@ node_templates:
 
   // Docker images shall be pulled from public registry
   docker-public-registry:
-    type: sodalite.nodes.DockerRegistry
+    type: docker/sodalite.nodes.DockerRegistry
     properties:
       docker_registry_url: "registry.hub.docker.com"
     requirements:
@@ -113,7 +113,7 @@ node_templates:
 
   // Training DB service
   training-db-service:
-    type: sodalite.nodes.DockerizedComponent
+    type: docker/sodalite.nodes.DockerizedComponent
     properties:
       alias: "trainingdb_service"
       docker_network_name: get_property:
@@ -135,7 +135,7 @@ node_templates:
 
   // Volume for Training and Prediction services 
   model-repo-volume:
-    type: sodalite.nodes.DockerVolume
+    type: docker/sodalite.nodes.DockerVolume
     properties:
       name: "model-repo"
     requirements:
@@ -146,7 +146,7 @@ node_templates:
 
   // Training service
   training-service:
-    type: sodalite.nodes.DockerizedComponent
+    type: docker/sodalite.nodes.DockerizedComponent
     properties:
       alias: "training_service"
       docker_network_name: get_property:
@@ -173,7 +173,7 @@ node_templates:
 
   // Prediction service
   prediction-service:
-    type: sodalite.nodes.DockerizedComponent
+    type: docker/sodalite.nodes.DockerizedComponent
     properties:
       alias: "prediction_service"
       docker_network_name: get_property:
