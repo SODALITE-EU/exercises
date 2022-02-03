@@ -103,6 +103,8 @@ node_templates:
     type: docker/sodalite.nodes.DockerRegistry
     properties:
       docker_registry_url: "registry.hub.docker.com"
+      docker_user: ""
+      docker_pass: ""
     requirements:
       host:
         node: sodalite-vm
@@ -121,6 +123,7 @@ node_templates:
         property: docker-network.name
         req_cap: training-db-service.network
       image_name: "indikakumara/trainingdbapi:0.0.1"
+      registry_url: "registry.hub.docker.com"
       restart_policy: "always"
       ports: ["5000:5000"]
       env:
@@ -154,6 +157,7 @@ node_templates:
         property: docker-network.name
         req_cap: training-service.network
       image_name: "indikakumara/trainapi:0.0.1"
+      registry_url: "registry.hub.docker.com"
       restart_policy: "always"
       ports: ["5001:5000"]
       volumes: ["model-repo:/usr/src/myapp/models"]
@@ -181,6 +185,7 @@ node_templates:
         property: docker-network.name
         req_cap: prediction-service.network
       image_name: "indikakumara/predictionapi:0.0.1"
+      registry_url: "registry.hub.docker.com"
       restart_policy: "always"
       ports: ["5002:5000"]
       volumes: ["model-repo:/usr/src/myapp/models"]

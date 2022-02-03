@@ -3,3 +3,4 @@ modules
 .project
 src-gen
 *.inputs.complete.yaml
+*.properties
