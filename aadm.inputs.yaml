@@ -1,5 +1,4 @@
-ssh-key-name: <user keypair name>
-ssh-public-key: <xopera-rest-api public key>
+ssh-key-name: xopera-keypair
 
 vm-name: <user vm name>
 

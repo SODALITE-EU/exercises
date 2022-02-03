@@ -8,8 +8,6 @@ description: "ML Application deployment over OpenStack cloud"
 inputs:
   ssh-key-name:  
     type: string 
-  ssh-public-key:  
-    type: string 
   vm-name:  
     type: string 
   image-name:  
@@ -32,14 +30,6 @@ inputs:
 node_templates:
 
   // Setting up OpenStack resources //
-  
-  // OpenStack keypair
-  keypair:
-    type: openstack/sodalite.nodes.OpenStack.Keypair
-    properties:  
-      name: get_input: ssh-key-name
-      public_key: get_input: ssh-public-key
-      env: get_input: env
 
   // OpenStack security group for the ML Application
   ml-app-security-group:
@@ -85,8 +75,6 @@ node_templates:
       env: get_input: env
       timeout: 600
     requirements:
-      dependency:
-        node: keypair
       protected_by:
         node: ml-app-security-group
 

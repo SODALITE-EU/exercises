@@ -16,12 +16,4 @@ $ opera outputs
 
 ## Deployment using SODALITE IDE
 
-To deploy with SODALITE IDE, firstly configure the IDE backends as specified in the exercise material. In the `ml-application.aadm` set the module value as your username or namespace. Then, fetch xOpera REST API's public key:
-
-```
-$ curl -X 'GET' \
-  'https://xopera-rest-api.public-testbed.sodalite.eu/ssh/keys/public' \
-  -H 'accept: application/json'
-```
-
-Set this public key in the inputs: `aadm.inputs.yaml` along with the keypair name, VM name and OpenStack (OS) credentials, and deploy AADM.
+To deploy with SODALITE IDE, firstly configure the IDE backends as specified in the exercise material. Then, set VM name and OpenStack (OS) credentials in the `aadm.inputs.yaml` inputs file, and deploy AADM.
