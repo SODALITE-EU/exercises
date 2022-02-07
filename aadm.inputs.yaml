@@ -1,10 +1,9 @@
 vm-name: <user vm name>
+security-group-name: <user security group name>
 ssh-key-name: xopera-keypair
 image-name: "Ubuntu 20.04 Focal Fossa 20200423"
 openstack-network-name: sodalite-net
 openstack-floating-ip-pool: ext-net
-security-group-name: ml-app-security
-security-groups: ml-app-security,default
 flavor-name: 1C-4GB-20GB
 username: ubuntu
 env:
