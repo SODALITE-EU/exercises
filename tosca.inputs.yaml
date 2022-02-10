@@ -2,7 +2,7 @@ ssh-key-name: <user keypair name>
 ssh-public-key: <user public key>
 
 vm-name: <user vm name>
-security-group-name: <user security group name>
+security-group-name: <user security group name>,default
 
 image-name: "Ubuntu 20.04 Focal Fossa 20200423"
 openstack-network-name: sodalite-net
