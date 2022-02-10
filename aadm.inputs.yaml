@@ -1,5 +1,6 @@
 vm-name: <user vm name>
-security-group-name: <user security group name>,default
+security-group-name: <user security group name>
+security-groups: <user security group name>,default
 ssh-key-name: xopera-keypair
 image-name: "Ubuntu 20.04 Focal Fossa 20200423"
 openstack-network-name: sodalite-net

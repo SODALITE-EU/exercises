@@ -26,6 +26,8 @@ topology_template:
     openstack-floating-ip-pool:  
       type: string 
     security-group-name:  
+      type: string  
+    security-groups:  
       type: string   
     flavor-name:  
       type: string
@@ -83,7 +85,7 @@ topology_template:
         key_name: { get_input: ssh-key-name } 
         image: { get_input: image-name }
         network: { get_input: openstack-network-name } 
-        security_groups: { get_input: security-group-name } 
+        security_groups: { get_input: security-groups } 
         flavor: { get_input: flavor-name }
         username: { get_input: username }
         floating_ip_pools: { get_input: openstack-floating-ip-pool } 
