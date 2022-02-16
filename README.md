@@ -4,7 +4,7 @@ This repository contains playground material to get acquainted with SODALITE. We
 
 ## Deployment using SODALITE IDE
 
-To deploy with SODALITE IDE, firstly configure the IDE backends as specified in the exercise material. Then, set VM name and OpenStack (OS) credentials in the `aadm.inputs.yaml` inputs file, and deploy AADM. Details on how to do it are available here. 
+To deploy with SODALITE IDE, firstly configure the IDE backends as specified in the exercise material. Then, set VM name and OpenStack (OS) credentials in the `aadm.inputs.yaml` inputs file, and deploy AADM. Details on how to do it are available in the `SODALITE Experiments User Manual.pdf`. 
 
 ## Deployment using xOpera CLI
 
