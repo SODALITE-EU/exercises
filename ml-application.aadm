@@ -1,4 +1,4 @@
-module: <username or namespace>
+module: yosu
 
 import: docker
 import: openstack
