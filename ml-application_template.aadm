@@ -76,7 +76,7 @@ node_templates:
       timeout: 600
     requirements:
       protected_by:
-        node: ml-app-security-group
+        node: username/ml-app-security-group
 
   // Setting up Docker environment on the OpenStack VM //
 
@@ -85,7 +85,7 @@ node_templates:
     type: docker/sodalite.nodes.DockerHost
     requirements:
       host:
-        node: sodalite-vm
+        node: username/sodalite-vm
 
   // Docker network
   docker-network:
@@ -94,9 +94,9 @@ node_templates:
       name: "ml-app-docker-network"
     requirements:
       host:
-        node: sodalite-vm
+        node: username/sodalite-vm
       dependency:
-        node: docker-host
+        node: username/docker-host
 
   // Docker images shall be pulled from public registry
   docker-public-registry:
@@ -107,9 +107,9 @@ node_templates:
       docker_pass: ""
     requirements:
       host:
-        node: sodalite-vm
+        node: username/sodalite-vm
       dependency:
-        node: docker-host
+        node: username/docker-host
 
   // Deploying components of the ML application //
   // Create your ML application service nodes HERE
@@ -122,9 +122,9 @@ node_templates:
       name: "model-repo"
     requirements:
       host:
-        node: sodalite-vm
+        node: username/sodalite-vm
       dependency:
-        node: docker-host
+        node: username/docker-host
 
 
 // Obtaining useful outputs, such as public IP of the VM //
@@ -137,5 +137,5 @@ outputs:
     type: string
     description: "The public IP of the provisioned VM"
     value: get_attribute: 
-      entity: sodalite-vm
-      attribute: sodalite-vm.public_address
+      entity: username/sodalite-vm
+      attribute: username/sodalite-vm.public_address

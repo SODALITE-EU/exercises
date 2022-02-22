@@ -1,4 +1,4 @@
-module: yosu
+module: module
 
 import: docker
 import: openstack
@@ -76,7 +76,7 @@ node_templates:
       timeout: 600
     requirements:
       protected_by:
-        node: ml-app-security-group
+        node: module/ml-app-security-group
 
   // Setting up Docker environment on the OpenStack VM //
 
@@ -85,7 +85,7 @@ node_templates:
     type: docker/sodalite.nodes.DockerHost
     requirements:
       host:
-        node: sodalite-vm
+        node: module/sodalite-vm
 
   // Docker network
   docker-network:
@@ -94,9 +94,9 @@ node_templates:
       name: "ml-app-docker-network"
     requirements:
       host:
-        node: sodalite-vm
+        node: module/sodalite-vm
       dependency:
-        node: docker-host
+        node: module/docker-host
 
   // Docker images shall be pulled from public registry
   docker-public-registry:
@@ -107,9 +107,9 @@ node_templates:
       docker_pass: ""
     requirements:
       host:
-        node: sodalite-vm
+        node: module/sodalite-vm
       dependency:
-        node: docker-host
+        node: module/docker-host
 
   // Deploying components of the ML application //
 
@@ -120,8 +120,8 @@ node_templates:
       alias: "trainingdb_service"
       docker_network_name: get_property:
         entity: SELF
-        property: docker-network.name
-        req_cap: training-db-service.network
+        property: module/docker-network.name
+        req_cap: module/training-db-service.network
       image_name: "indikakumara/trainingdbapi:0.0.1"
       registry_url: "registry.hub.docker.com"
       restart_policy: "always"
@@ -130,11 +130,11 @@ node_templates:
         DB_URL: "sqlite:///features.db"
     requirements:
       host:
-        node: docker-host
+        node: module/docker-host
       network:
-        node: docker-network
+        node: module/docker-network
       registry:
-        node: docker-public-registry
+        node: module/docker-public-registry
 
   // Volume for Training and Prediction services 
   model-repo-volume:
@@ -143,9 +143,9 @@ node_templates:
       name: "model-repo"
     requirements:
       host:
-        node: sodalite-vm
+        node: module/sodalite-vm
       dependency:
-        node: docker-host
+        node: module/docker-host
 
   // Training service
   training-service:
@@ -154,8 +154,8 @@ node_templates:
       alias: "training_service"
       docker_network_name: get_property:
         entity: SELF
-        property: docker-network.name
-        req_cap: training-service.network
+        property: module/docker-network.name
+        req_cap: module/training-service.network
       image_name: "indikakumara/trainapi:0.0.1"
       registry_url: "registry.hub.docker.com"
       restart_policy: "always"
@@ -165,15 +165,15 @@ node_templates:
         TRAININGDB_API: "http://trainingdb_service:5000/training-db/diabetes"
     requirements:
       host:
-        node: docker-host
+        node: module/docker-host
       network:
-        node: docker-network
+        node: module/docker-network
       registry:
-        node: docker-public-registry
+        node: module/docker-public-registry
       dependency:
-        node: training-db-service
+        node: module/training-db-service
       dependency:
-        node: model-repo-volume
+        node: module/model-repo-volume
 
   // Prediction service
   prediction-service:
@@ -182,8 +182,8 @@ node_templates:
       alias: "prediction_service"
       docker_network_name: get_property:
         entity: SELF
-        property: docker-network.name
-        req_cap: prediction-service.network
+        property: module/docker-network.name
+        req_cap: module/prediction-service.network
       image_name: "indikakumara/predictionapi:0.0.1"
       registry_url: "registry.hub.docker.com"
       restart_policy: "always"
@@ -191,15 +191,15 @@ node_templates:
       volumes: ["model-repo:/usr/src/myapp/models"]
     requirements:
       host:
-        node: docker-host
+        node: module/docker-host
       network:
-        node: docker-network
+        node: module/docker-network
       registry:
-        node: docker-public-registry
+        node: module/docker-public-registry
       dependency:
-        node: training-service
+        node: module/training-service
       dependency:
-        node: model-repo-volume
+        node: module/model-repo-volume
 
 // Obtaining useful outputs, such as public IP of the VM //
 
@@ -211,5 +211,5 @@ outputs:
     type: string
     description: "The public IP of the provisioned VM"
     value: get_attribute: 
-      entity: sodalite-vm
-      attribute: sodalite-vm.public_address
+      entity: module/sodalite-vm
+      attribute: module/sodalite-vm.public_address
